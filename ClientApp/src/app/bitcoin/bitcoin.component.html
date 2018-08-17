@@ -1,0 +1,45 @@
+<div class="container">
+  <form>
+      <input name="exchangeCode" [(ngModel)]="exchangeCode" type="text">
+      <input name="exchangeMarket" [(ngModel)]="exchangeMarket" type="text">
+      <input type="text" name="rate" [(ngModel)]="rate">
+  </form>
+  <div> rate: {{ 100 * rate }} %</div>
+  <h5>Montant initial: {{nominalInitialUsd}} $</h5>
+  <p *ngIf="startTime">Date du lancement nucléaire {{startTime | date: 'mediumTime'}} </p>
+  <p *ngIf="btcUsdAtStart"> t=0 : {{ btcUsdAtStart }} $</p>
+  
+  <div class="col-xl-6">
+      <h2>
+          <span class="glyphicon glyphicon-usd"></span> portfolio: {{nominalUsd}} $ </h2>
+      <h2>
+          <span class="glyphicon glyphicon-btc"></span> portfolio : {{nominalBtc}}  </h2>
+      <h3><span class="glyphicon glyphicon-btc"></span>:  {{btcUsd}} </h3>
+      <h3>Classique : {{ nominalInitialUsd * (1 +( btcUsd - btcUsdAtBuy ) / btcUsdAtBuy )}} $</h3>
+      <h3> Equity: {{ equity}} $</h3>
+  </div>
+  <div class="container col-12">
+      <div class="col-xl-6 col-lg-6">
+          <div class="form-group row">
+              Target Ask : {{targetAsk}}
+          </div>
+          <div class="form-group row">
+              Target Bid : {{targetBid}}
+          </div>
+          <div class="form-group row">
+              Basis price: {{basisPrice}} $
+         </div>
+      </div>
+      <div class="col-xl-6 col-lg-6">
+          <div class="row">
+              to buy : <span class="glyphicon glyphicon-arrow-up"></span> {{ targetAsk - btcUsd }}
+          </div>
+          <div class="row">
+              to sell : <span class="glyphicon glyphicon-arrow-down"></span> {{ btcUsd - targetBid }}
+          </div>
+        
+      </div>    
+  </div>
+  
+  <button class="btn btn-primary btn-block btn-danger" (click)="start(basisPrice)">Relancer</button>
+</div>
